@@ -1,11 +1,15 @@
 import React, { PropTypes } from 'react';
 
 export default (ComposedComponent) => {
-  const ConnectLocalization = props => <ComposedComponent {...props} />;
+  const LocalizeConnected = (props, context) => <ComposedComponent
+    {...props}
+    localize={context.localize}
+  />;
 
-  ConnectLocalization.displayName = 'ConnectLocalization';
-  ConnectLocalization.contextTypes = {
+  LocalizeConnected.displayName = `LocalizeConnected(${ComposedComponent.name})`;
+  LocalizeConnected.contextTypes = {
     localize: PropTypes.func
   };
-  return ConnectLocalization;
+
+  return LocalizeConnected;
 };
